@@ -1,12 +1,9 @@
-import { createRouter, createWebHistory, NavigationGuardNext, RouteLocationNormalized, Router, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, Router, RouteRecordRaw } from "vue-router";
 import NProgress from "nprogress";
+import { View } from "@/views/constants";
 
 import Home from "@/views/home/home.vue";
-import Login from "@/views/login/login.vue";
-import Register from "@/views/register/register.vue";
-
-import { View } from "@/views/constants";
-import { auth } from "@/providers/firebase-provider";
+import Orders from "@/views/orders/orders.vue";
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -15,20 +12,9 @@ const routes: Array<RouteRecordRaw> = [
 		component: Home
 	},
 	{
-		path: "/login",
-		name: View.Login,
-		component: Login,
-		meta: {
-			visible: true
-		}
-	},
-	{
-		path: "/register",
-		name: View.Register,
-		component: Register,
-		meta: {
-			visible: true
-		}
+		path: "/orders",
+		name: View.Orders,
+		component: Orders
 	}
 ];
 
@@ -37,15 +23,8 @@ const router: Router = createRouter({
 	routes
 });
 
-router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+router.beforeEach(() => {
 	NProgress.start();
-	if (!auth.currentUser && to.meta.visible !== true) {
-		router.push("/login");
-	}
-	if (auth.currentUser && to.meta.visible === true) {
-		router.push("/");
-	}
-	next();
 });
 
 router.afterEach(() => {

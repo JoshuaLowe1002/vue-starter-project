@@ -1,21 +1,23 @@
-import { auth } from "@/providers/firebase-provider";
-import router from "@/router";
+import { getLocalizedText } from "@/utilities/localization";
 import { reactive } from "vue";
 import { HomeState } from "./home-state";
 
-export class Home {
+export class HomeModel {
 	// Define state for home page
 	public state: HomeState = reactive(new HomeState);
 
-	// Initialise home page
-	public init(): void {
-		this.state.title = "Welcome! 👋";
+	// Get Translated text
+	public getText(key: string): string {
+		return getLocalizedText("home", key);
 	}
 
-	// Sign User Out
-	public signOut(): void {
-		auth.signOut().then(() => {
-			router.push("/login");
-		});
+	// Initialise home page
+	public init(): void {
+		this.changeTitle(`${this.getText("welcome")} 👋`);
+	}
+
+	// Change title text
+	public changeTitle(text: string): void {
+		this.state.title = text;
 	}
 }

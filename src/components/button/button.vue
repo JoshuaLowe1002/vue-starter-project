@@ -20,9 +20,6 @@ export default defineComponent({
 		text: {
 			type: String
 		},
-		color: {
-			type: String
-		},
 		disabled: {
 			type: Boolean
 		}

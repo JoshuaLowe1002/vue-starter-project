@@ -1,18 +1,16 @@
-import { ComponentPublicInstance, createApp } from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import "@/assets/index.css";
 import Components from "@/components/index";
-import { auth } from "./providers/firebase-provider";
-import "@/providers/icon-provider";
+import "@/data/providers/icon-provider";
+import { loadPreferredLanguageAsync } from "./utilities/localization";
 
-let app: ComponentPublicInstance | undefined;
+export const preferredLanguage: string = "en";
 
-auth.onAuthStateChanged(() => {
-	if (!app) {
-		app = createApp(App)
-			.use(router)
-			.use(Components)
-			.mount("#app");
-	}
+loadPreferredLanguageAsync().then(() => {
+	createApp(App)
+		.use(router)
+		.use(Components)
+		.mount("#app");
 });

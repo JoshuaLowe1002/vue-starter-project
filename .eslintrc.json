@@ -40,7 +40,7 @@
           "max-depth": ["error", { "max": 4 }],
           "no-alert": "error",
           "no-await-in-loop": "error",
-          "no-console": "error",
+          "no-console": 0,
           "no-debugger": "error",
           "no-floating-decimal": "error",
           "no-implicit-coercion": "error",
