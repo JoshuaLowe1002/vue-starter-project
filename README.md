@@ -3,7 +3,7 @@
 ### Example tasks:
 - Product page to return list of products
 - Product detail page for single product
-- Button component where you can specify a colour
+- Button component where you can specify a style (e.g. Primary, Secondary)
 
 
 ### Get Started:
